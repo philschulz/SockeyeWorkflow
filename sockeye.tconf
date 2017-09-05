@@ -1,0 +1,67 @@
+global {
+
+  # enable package downloads and imports
+  ducttape_experimental_packages=enable 
+  ducttape_experimental_imports=true 
+
+  # general
+  source_language=zh
+  target_language=en
+  translation_file=translations 
+  ducttape_folder=/home/pschulz/ducttape_tests
+
+  # corpora
+  corpus_dir=/home/wferrei1/data/btec/zh-en/
+  training_corpus=/home/wferrei1/data/btec/zh-en/training.zh-en
+  dev_corpus=/home/wferrei1/data/btec/zh-en/dev1_2.zh-en
+  test_corpus=/home/wferrei1/data/btec/zh-en/dev3.zh-en
+
+  # sentence piece
+  spm_vocab_size=10000
+  spm_format=piece
+  spm_model_name=spm_model
+
+  # gpus
+  devices=-1 # sockeye default: aquires one available gpu
+
+  # model specs
+  rnn_num_hidden=1064
+  attention_num_hidden=256
+  attention_type=(Attention: mlp dot)
+  rnn_layers="1:1" # sockeye default
+  rnn_cell=(RnnCell: lstm gru)
+  max_sequence_length="100:100" # sockeye default 
+  
+  # optimizer
+  optimizer=adam # sockeye default
+  metric_to_optimize=perplexity # sockeye default
+  max_num_checkpoints_not_improved=8 # sockeye default
+  optimizer_loss=cross-entropy # sockeye default
+
+  # embedding specs
+  embedding_size="512:512" # sockeye default
+
+  # vocab specs
+  vocab_size="50000:50000" # sockeye default
+  word_min_count="1:1" # sockeye default
+ 
+  # training specs
+  batch_size=64 # sockeye default
+  metric=perplexity # sockeye default
+  opitmizer=adam # sockeye default
+  l2_regularisation=0 # sockeye default
+  max_checkpoints=8 # sockeye default
+  gradient_clipping=1 # sockeye default
+  monitor_bleu=-1 # number of sentences from the dev set on which to track BLEU -> this setting uses all sentences
+
+  # averaging specs
+  best_checkpoints=4 # number of best checkpoints to use for ensembling from one run
+  averaging_metric=perplexity
+
+  # decoding specs
+  beam_size=5 # sockeye default
+}
+
+plan toy {
+  reach eval
+}
