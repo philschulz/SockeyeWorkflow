@@ -19,7 +19,7 @@ tar -xvzf ducttape-0.3.tgz
 export PATH=$PWD/ducttape-0.3:$PATH
 ```
 
-You will also need to install ant (for building multeval). The ant binaries can be found [here](https://ant.apache.org/bindownload.cgi). You might also need glibtool which you get as follows:
+You will also need to install ant (for building multeval). The ant binaries can be found [here](https://ant.apache.org/bindownload.cgi). Furthermore you need glibtool in order to build sentence piece. You get it as follows:
 ```
 sudo apt-get install libtool-bin
 ```
@@ -33,9 +33,4 @@ ducttape workflow.tape -C sockeye.tconf
 ```
 
 # Known Issues
-At the moment it seems that sockeye mess with mxnet. If that happens, the train_model task will crash this can be remedied by typing
-```python
-pip uninstall mxnet mxnet-cu80
-pip install mxnet-cu80==0.10.0
-```
-After that the train_model task should work (until a new version of sockeye is pulled).
+At the moment it sockeye fails to build the first time. Simply run the workflow again and then everything should be fine. I'll dig into why this happens.

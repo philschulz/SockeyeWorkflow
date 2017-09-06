@@ -2,9 +2,10 @@ task average : sockeye
   < model=$sockeye_model@train_model
   :: checkpoints=$best_checkpoints
   :: metric=$averaging_metric
-  > averaged_params=averaged_params {
-  
-  python -m sockeye.average -o averaged_params -n $checkpoints --metric $metric
+  > averaged_model=averaged_model {
+ 
+  cpi -r $model averaged_model
+  python -m sockeye.average -o averaged_model/param.best -n $checkpoints --metric $metric
 
 }
 

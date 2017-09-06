@@ -63,5 +63,5 @@ global {
 }
 
 plan toy {
-  reach eval
+  reach eval via (Attention: *) * (RnnCell: *)
 }
