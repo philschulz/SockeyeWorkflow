@@ -1,5 +1,7 @@
 # SockeyeWorkflow
-A workflow for experimenting with the Sockeye NMT system
+A workflow for experimenting with the Sockeye NMT system. It downloads the IWSLT data for experiments. No preprocessing is done since the workflow uses sentencepiece which does all the necessary preprocessing in one go. Importantly, evaluation with Multeval is done on the original text (no recasing, tokenisation or the like). The available language pairs are English paired with Arabic, Czech, German and French.
+
+**Important:** If you want to use this workflow with an NMT system different from sockeye, you will need to modify ```train_model.tape``` and download the necessary software using ```packages.tape```. Finally, you can manipulate ```data.tape``` to use different data sets. There should be no need to touch any of the other tapes.
 
 ## Ingredients
 This workflow will download and build the following: 
@@ -19,17 +21,17 @@ tar -xvzf ducttape-0.3.tgz
 export PATH=$PWD/ducttape-0.3:$PATH
 ```
 
-You will also need to install ant (for building multeval). The ant binaries can be found [here](https://ant.apache.org/bindownload.cgi). Furthermore you need glibtool in order to build sentence piece. You get it as follows:
+To ensure that the dependencies of sentencepiece and multeval are satisfied, run
 ```
-sudo apt-get install libtool-bin
+sudo apt-get install autoconf automake libtool libprotobuf-c++ protobuf-compiler libprotobuf-dev ant
 ```
 
-Finally, the pulled sockeye version requires cuda8.
+Notice that the pulled sockeye version requires cuda8.
 
 # Executing the workflow
 After all the above, simply type
 ```
-ducttape workflow.tape -C sockeye.tconf
+ducttape workflow.tape -C sockeye.tconf -O <path to output directory>
 ```
 
 # Known Issues
