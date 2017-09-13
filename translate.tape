@@ -5,7 +5,7 @@ task average : sockeye
   > averaged_model=averaged_model {
  
   cp -r $model averaged_model
-  python -m sockeye.average -o averaged_model/param.best -n $checkpoints --metric $metric $model
+  python -m sockeye.average -o averaged_model/params.best -n $checkpoints --metric $metric $model
 
 }
 
