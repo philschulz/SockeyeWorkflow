@@ -5,16 +5,10 @@ global {
   ducttape_experimental_imports=true 
 
   # general
-  source_language=zh
-  target_language=en
+  source_language=en
+  target_language=de
   translation_file=translations 
   ducttape_folder=/home/pschulz/ducttape_tests
-
-  # corpora
-  corpus_dir=/home/wferrei1/data/btec/zh-en/
-  training_corpus=/home/wferrei1/data/btec/zh-en/training.zh-en
-  dev_corpus=/home/wferrei1/data/btec/zh-en/dev1_2.zh-en
-  test_corpus=/home/wferrei1/data/btec/zh-en/dev3.zh-en
 
   # sentence piece
   spm_vocab_size=10000
