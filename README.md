@@ -36,5 +36,3 @@ ducttape workflow.tape -C sockeye.tconf -p toy -O <path to output directory>
 ## Plans
 In order to run your own experiments, you will need to specify different plans. Currently, there is only one plan: toy. It has two branch points, namely Attention and RnnCell. It runs 4 experiments in total, crossing the 2 rnn cell types with the 2 attention types (there are more in sockeye but the branch points only use 2). Try designing your own experiments by introducing new branch points!
 
-# Known Issues
-At the moment it sockeye fails to build the first time. Simply run the workflow again and then everything should be fine. I'll dig into why this happens.
