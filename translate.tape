@@ -5,7 +5,11 @@ task average : sockeye
   > averaged_model=averaged_model {
  
   cp -r $model averaged_model
-  python -m sockeye.average -o averaged_model/params.best -n $checkpoints --metric $metric $model
+  rm averaged_model/params.best
+  python -m sockeye.average -o averaged_model/params.best -n $checkpoints --metric $metric averaged_model
+  
+  # do this to save space
+  find averaged_model -regex '.*[0-9]$' -delete
 
 }
 

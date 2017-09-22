@@ -11,7 +11,7 @@ global {
   ducttape_folder=/home/pschulz/ducttape_tests
 
   # sentence piece
-  spm_vocab_size=10000
+  spm_vocab_size=50000
   spm_format=piece
   spm_model_name=spm_model
 
