@@ -19,6 +19,6 @@ task translate : sockeye
   :: beam=$beam_size 
   > translation=translation {
 
-  python -m sockeye.translate --use-cpu --models $model --input $input --output translation
+  python -m sockeye.translate --device-ids -1 --models $model --input $input --output translation
 
 }
