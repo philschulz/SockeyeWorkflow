@@ -16,7 +16,7 @@ global {
   spm_model_name=spm_model
 
   # gpus
-  devices=-1 # sockeye default: aquires one available gpu
+  devices=-2 # sockeye default: aquires one available gpu
 
   # model specs
   rnn_num_hidden=1064
@@ -25,6 +25,7 @@ global {
   rnn_layers="1:1" # sockeye default
   rnn_cell=(RnnCell: lstm gru)
   max_sequence_length="100:100" # sockeye default 
+  additional_arguments=(AddArgs: none="")
   
   # optimizer
   optimizer=adam # sockeye default
@@ -40,7 +41,7 @@ global {
   word_min_count="1:1" # sockeye default
  
   # training specs
-  batch_size=64 # sockeye default
+  batch_size=128 # sockeye default
   metric=perplexity # sockeye default
   opitmizer=adam # sockeye default
   l2_regularisation=0 # sockeye default
