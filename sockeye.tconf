@@ -16,7 +16,7 @@ global {
   spm_model_name=spm_model
 
   # gpus
-  devices=-1 # sockeye default: aquires one available gpu
+  devices=-2 # sockeye default: aquires one available gpu
 
   # model specs
   rnn_num_hidden=1064
@@ -25,7 +25,8 @@ global {
   rnn_layers="1:1" # sockeye default
   rnn_cell=(RnnCell: lstm gru)
   max_sequence_length="100:100" # sockeye default 
-  
+  latent_dim=(LatentDim: none=0)  
+
   # optimizer
   optimizer=adam # sockeye default
   metric_to_optimize=perplexity # sockeye default
@@ -33,20 +34,21 @@ global {
   optimizer_loss=cross-entropy # sockeye default
 
   # embedding specs
-  embedding_size="512:512" # sockeye default
+  embedding_size="256:256" # sockeye default
 
   # vocab specs
   vocab_size="50000:50000" # sockeye default
   word_min_count="1:1" # sockeye default
  
   # training specs
-  batch_size=64 # sockeye default
+  batch_size=80 # sockeye default
   metric=perplexity # sockeye default
   opitmizer=adam # sockeye default
   l2_regularisation=0 # sockeye default
   max_checkpoints=8 # sockeye default
   gradient_clipping=1 # sockeye default
   monitor_bleu=-1 # number of sentences from the dev set on which to track BLEU -> this setting uses all sentences
+  dropout=(Dropout: none="0.0:0.0" half="0.5:0.5")
 
   # averaging specs
   best_checkpoints=4 # number of best checkpoints to use for ensembling from one run
@@ -56,6 +58,6 @@ global {
   beam_size=5 # sockeye default
 }
 
-plan toy {
-  reach eval via (Attention: *) * (RnnCell: *)
+plan baseline {
+  reach eval via (Attention: *) * (RnnCell: *) * (Dropout: *)
 }
