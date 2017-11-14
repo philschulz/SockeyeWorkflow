@@ -24,6 +24,7 @@ task train_model : sockeye
   :: max_num_checkpoints=$max_num_checkpoints_not_improved
   :: dropout=@
   :: latent_dim=@
+  :: add_args=$additional_arguments
   > sockeye_model=model {
   python -m sockeye.train -s $training_source -t $training_target --device-ids $device_ids --rnn-num-hidden $rnn_hidden --rnn-attention-num-hidden $att_hidden --rnn-attention-type $att_type \
   -o model --num-words $num_words --word-min-count $min_count --num-layers $num_layers --rnn-cell-type $cell_type --num-embed $num_embed --max-seq-len $sequence_length \
