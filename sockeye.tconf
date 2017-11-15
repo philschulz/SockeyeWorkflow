@@ -11,7 +11,7 @@ global {
   ducttape_folder=/home/pschulz/ducttape_tests
   data_path=/home/schulzp/data
   multeval_path=/home/schulzp/local-install/muteval
-  lock_dir=/home/schulzp/gpu-locks
+  lock_dir=/tmp # sockeye default
 
   # sentence piece
   spm_vocab_size=50000
