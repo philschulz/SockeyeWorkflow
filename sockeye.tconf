@@ -9,6 +9,7 @@ global {
   target_language=de
   translation_file=translations 
   ducttape_folder=/home/pschulz/ducttape_tests
+  lock_dir=/tmp # sockeye default
 
   # sentence piece
   spm_vocab_size=50000
@@ -26,7 +27,7 @@ global {
   rnn_cell=(RnnCell: lstm gru)
   max_sequence_length="100:100" # sockeye default 
   latent_dim=(LatentDim: none=0)  
-  additional_arguments=(AddArgs: none="")
+  additional_arguments=(AddArgs: none="--use-tensorboard")
   
   # optimizer
   optimizer=adam # sockeye default

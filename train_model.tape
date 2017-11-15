@@ -25,9 +25,11 @@ task train_model : sockeye
   :: dropout=@
   :: latent_dim=@
   :: add_args=$additional_arguments
+  :: lock_dir=@
   > sockeye_model=model {
   python -m sockeye.train -s $training_source -t $training_target --device-ids $device_ids --rnn-num-hidden $rnn_hidden --rnn-attention-num-hidden $att_hidden --rnn-attention-type $att_type \
   -o model --num-words $num_words --word-min-count $min_count --num-layers $num_layers --rnn-cell-type $cell_type --num-embed $num_embed --max-seq-len $sequence_length \
   --metrics $met --weight-decay $weight_decay --loss $loss --monitor-bleu $bleu -b $batch --clip-gradient $clipping --optimizer $opt --optimized-metric $opt_metric --use-tensorboard \
-  --validation-source $dev_source --validation-target $dev_target --max-num-checkpoint-not-improved $max_num_checkpoints --latent-dim $latent_dim --rnn-dropout-inputs $dropout --rnn-dropout-states $dropout
+  --validation-source $dev_source --validation-target $dev_target --max-num-checkpoint-not-improved $max_num_checkpoints --latent-dim $latent_dim --rnn-dropout-inputs $dropout --rnn-dropout-states $dropout \
+  $add_args --lock-dir $lock_dir
 }
