@@ -1,4 +1,4 @@
-task average : sockeye
+task average
   < model=$sockeye_model@train_model
   :: checkpoints=$best_checkpoints
   :: metric=$averaging_metric
@@ -13,7 +13,7 @@ task average : sockeye
 
 }
 
-task translate : sockeye 
+task translate 
   < model=$averaged_model@average
   < input=$spm_source_test_encoded@spm_encode
   :: beam=$beam_size 

@@ -1,6 +1,7 @@
-task eval : multeval
-  < reference=$data@data
+task eval
+  < reference=$data_path
   < hypothesis=$plain_text_translation@spm_decode
+  :: multeval=$multeval_path
   :: target_l=$target_language
   :: source_l=$source_language 
   > result {
