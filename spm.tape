@@ -4,8 +4,10 @@ task spm_train
   :: data=$data_path
   :: target_l=$target_language
   :: num_words=$spm_vocab_size
+  :: annotation=@
+  :: foreign=$target_language
   :: model=$spm_model_name {
-  cat $data/${source_l}2${target_l}/train.${source_l} $data/${target_l}2${source_l}/train.${target_l} > concat_corpus
+  cat $data/europarl.${foreign}-en/europarl.${foreign}-en.$source_l.aligned.$annotation.train $data/europarl.${foreign}-en/europarl.${foreign}-en.$target_l.aligned.$annotation.train > concat_corpus
   spm_train --input=concat_corpus --vocab_size=$num_words --model_prefix=$model # --input_sentence_size 10M
   rm concat_corpus
   mv $model.model spm_model
@@ -16,17 +18,19 @@ task spm_encode
   :: format=$spm_format
   :: source_l=$source_language
   :: target_l=$target_language
+  :: annotation=@
+  :: foreign=$target_language
   :: data=$data_path
   > spm_source_train_encoded=training.bpe.source
   > spm_source_dev_encoded=dev.bpe.source
   > spm_target_train_encoded=training.bpe.target
   > spm_target_dev_encoded=dev.bpe.target
   > spm_source_test_encoded=test.bpe.source {
-  spm_encode --model=$model --output_format=$format < $data/${source_l}2${target_l}/train.${source_l} > training.bpe.source
-  spm_encode --model=$model --output_format=$format < $data/${source_l}2${target_l}/dev.${source_l} > dev.bpe.source
-  spm_encode --model=$model --output_format=$format < $data/${target_l}2${source_l}/train.${target_l} > training.bpe.target
-  spm_encode --model=$model --output_format=$format < $data/${target_l}2${source_l}/dev.${target_l} > dev.bpe.target
-  spm_encode --model=$model --output_format=$format < $data/${source_l}2${target_l}/test.${source_l} > test.bpe.source 
+  spm_encode --model=$model --output_format=$format < $data/europarl.${foreign}-en/europarl.${foreign}-en.$source_l.aligned.$annotation.train > training.bpe.source
+  spm_encode --model=$model --output_format=$format < $data/europarl.${foreign}-en/europarl.${foreign}-en.$source_l.aligned.$annotation.dev > dev.bpe.source
+  spm_encode --model=$model --output_format=$format < $data/europarl.${foreign}-en/europarl.${foreign}-en.$target_l.aligned.$annotation.train > training.bpe.target
+  spm_encode --model=$model --output_format=$format < $data/europarl.${foreign}-en/europarl.${foreign}-en.$target_l.aligned.$annotation.dev > dev.bpe.target
+  spm_encode --model=$model --output_format=$format < $data/europarl.${foreign}-en/europarl.${foreign}-en.$source_l.aligned.$annotation.test > test.bpe.source 
 }
 
 task spm_decode

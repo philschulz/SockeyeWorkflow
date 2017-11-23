@@ -16,9 +16,10 @@ task average
 task translate 
   < model=$averaged_model@average
   < input=$spm_source_test_encoded@spm_encode
-  :: beam=$beam_size 
+  :: beam=$beam_size
+  :: decoding_device=@ 
   > translation=translation {
 
-  python -m sockeye.translate --device-ids -1 --models $model --input $input --output translation
+  python -m sockeye.translate --device-ids $decoding_device --models $model --input $input --output translation
 
 }

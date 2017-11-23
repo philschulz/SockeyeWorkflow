@@ -6,12 +6,13 @@ global {
 
   # general
   source_language=en
-  target_language=de
+  target_language=(Target: de fr)
   translation_file=translations 
   ducttape_folder=/home/pschulz/ducttape_tests
-  data_path=/home/schulzp/data
-  multeval_path=/home/schulzp/local-install/muteval
+  data_path=/home/schulzp/europarl.gender.annotated
+  multeval_path=/home/schulzp/local-installs/multeval
   lock_dir=/home/schulzp/gpu-locks
+  annotation=(Annotation: age gender langs)
 
   # sentence piece
   spm_vocab_size=50000
@@ -19,7 +20,8 @@ global {
   spm_model_name=spm_model
 
   # gpus
-  devices=-2 # sockeye default: aquires one available gpu
+  devices="2 3" # sockeye default: aquires one available gpu
+  decoding_device=2
 
   # model specs
   rnn_num_hidden=1064
@@ -28,8 +30,10 @@ global {
   rnn_layers="1:1" # sockeye default
   rnn_cell=(RnnCell: lstm gru)
   max_sequence_length="100:100" # sockeye default 
-  latent_dim=(LatentDim: 256 512 1024)  
-  additional_arguments=(AddArgs: none="--use-variational-approximation")
+  latent_dim=(LatentDim: 0 256 512 1024)  
+  additional_arguments=(AddArgs: 
+    none="--use-tensorboard"
+    var="--use-tensorboard --use-variational-approximation")
   
   # optimizer
   optimizer=adam # sockeye default
@@ -62,10 +66,7 @@ global {
   beam_size=5 # sockeye default
 }
 
-plan lstm {
-  reach eval via (Attention: *) * (RnnCell: lstm) * (Dropout: none) * (LatentDim: *)
+plan annotation {
+  reach eval via (Attention: *) * (RnnCell: lstm) * (Dropout: *) * (LatentDim: 0) * (Annotation: gender langs) * (Target: *)
 }
 
-plan gru {
-  reach eval via (Attention: *) * (RnnCell: gru) * (Dropout: none) * (LatentDim: *)
-}
