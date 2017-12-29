@@ -55,7 +55,7 @@ global {
 
   # averaging specs
   best_checkpoints=4 # number of best checkpoints to use for ensembling from one run
-  averaging_metric=perplexity
+  averaging_metric=(AvgMetric: perplexity elbo)
 
   # decoding specs
   beam_size=5 # sockeye default
