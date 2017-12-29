@@ -10,6 +10,7 @@ global {
   translation_file=translations 
   ducttape_folder=/home/pschulz/ducttape_tests
   lock_dir=/tmp # sockeye default
+  clean_corpus=~/SockeyeWorkflow/clean_corpus.py
 
   # sentence piece
   spm_vocab_size=50000
@@ -31,7 +32,7 @@ global {
   
   # optimizer
   optimizer=adam # sockeye default
-  metric_to_optimize=perplexity # sockeye default
+  opt_metric=perplexity # sockeye default
   max_num_checkpoints_not_improved=8 # sockeye default
   optimizer_loss=cross-entropy # sockeye default
 
@@ -44,7 +45,7 @@ global {
  
   # training specs
   batch_size=64 # sockeye default
-  metric=perplexity # sockeye default
+  metric=Metric(perplexity elbo) # sockeye default
   opitmizer=adam # sockeye default
   l2_regularisation=0 # sockeye default
   max_checkpoints=8 # sockeye default

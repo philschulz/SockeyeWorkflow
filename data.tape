@@ -1,4 +1,6 @@
-task data > data=data {
+task data
+  :: clean_corpus=@
+  > data=data {
 
   for lang in {ar,cs,de,fr}
   do
@@ -22,8 +24,9 @@ task data > data=data {
     
     # arrange training data and dev data
     mkdir -p data/en2$lang
-    grep '^[^<]' en-$lang/train.tags.en-$lang.en > data/en2$lang/train.en
-    grep '^[^<]' en-$lang/train.tags.en-$lang.$lang > data/en2$lang/train.$lang
+    python $clean_corpus en-$lang/train.tags.en-$lang.en en-$lang/train.tags.en-$lang.$lang
+    mv en-$lang/train.tags.en-$lang.en data/en2$lang/train.en
+    mv 'en-$lang/train.tags.en-$lang.$lang data/en2$lang/train.$lang
     mv en-$lang/dev.{en,$lang} data/en2$lang/
     rm -rf en-$lang* $lang-en*
 
