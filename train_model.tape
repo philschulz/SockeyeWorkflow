@@ -12,7 +12,7 @@ task train_model : sockeye
   :: num_layers=$rnn_layers
   :: num_embed=$embedding_size
   :: met=$metric
-  :: opt_metric=$metric_to_optimize
+  :: opt_metric=@
   :: num_words=$vocab_size
   :: weight_decay=$l2_regularisation
   :: min_count=$word_min_count

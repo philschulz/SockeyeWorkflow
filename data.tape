@@ -26,7 +26,7 @@ task data
     mkdir -p data/en2$lang
     python $clean_corpus en-$lang/train.tags.en-$lang.en en-$lang/train.tags.en-$lang.$lang
     mv en-$lang/train.tags.en-$lang.en data/en2$lang/train.en
-    mv 'en-$lang/train.tags.en-$lang.$lang data/en2$lang/train.$lang
+    mv en-$lang/train.tags.en-$lang.$lang data/en2$lang/train.$lang
     mv en-$lang/dev.{en,$lang} data/en2$lang/
     rm -rf en-$lang* $lang-en*
 
